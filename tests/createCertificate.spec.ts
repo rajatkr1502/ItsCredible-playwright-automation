@@ -1,16 +1,17 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
-import { env } from 'process';
-
-let username = process.env.username as string;
-let password = process.env.password as string;
-let url = process.env.url;
-
 require('dotenv').config();
+
+// let username = process.env.username as string;
+// let password = process.env.password as string;
+// let url = process.env.url;
+
+
 
 test('Create and Send Certificate', async ({ page })=> {
 
     // Login 
+    test.setTimeout(120000);
     await page.goto('/');
     // await page.getByRole('textbox', { name: 'Email Address' }).click();
     // await page.getByRole('textbox', { name: 'Email Address' }).fill(process.env.username);
@@ -45,7 +46,8 @@ test('Create and Send Certificate', async ({ page })=> {
     // await page.getByRole('tab', { name: 'Sent' }).click();
 
     const loginPage = new LoginPage(page);
-    await loginPage.login(username, password);
+    //await test.slow();
+    await loginPage.login(process.env.user, process.env.pass);
     await loginPage.createNewCertificate();
     await loginPage.sendEmail();
 

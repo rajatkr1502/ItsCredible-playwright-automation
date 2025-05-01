@@ -21,7 +21,8 @@ export class LoginPage {
         await this.page.locator('div:nth-child(3) > .MuiStack-root > .MuiPaper-root > img').first().click();
         await this.page.getByRole('button', { name: 'Choose date' }).click();
         await this.page.getByRole('gridcell', { name: '31' }).click();
-        await this.page.locator('div').filter({ hasText: /^Test Certificate$/ }).nth(2).click();
+        // await this.page.locator('div').filter({ hasText: /^Test Certificate$/ }).nth(2).click();
+        await this.page.locator("div[class='ql-container ql-snow']").click();
         await this.page.locator('div').filter({ hasText: /^Labels$/ }).getByRole('button').click();
         await this.page.getByRole('textbox', { name: 'Label Name' }).click();
         await this.page.getByRole('textbox', { name: 'Label Name' }).fill('Test_Automation');
@@ -42,7 +43,9 @@ export class LoginPage {
     async sendEmail() {
         await this.page.getByRole('button', { name: 'Next' }).click();
         await this.page.getByRole('group').getByRole('button', { name: 'Send' }).click();
+        await expect(this.page.locator("//h2[text()='Success!']")).toBeVisible();
         await this.page.getByRole('tab', { name: 'Sent' }).click();
+        
     }   
         
         
